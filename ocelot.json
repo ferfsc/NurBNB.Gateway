@@ -1,0 +1,144 @@
+{
+    "Routes": [
+	   // ****************************************** Servicio de Propiedades Disponibles **************************************//
+	   {
+		  "Key": "propiedadesDisponibles",
+		  "DownstreamPathTemplate": "/api/Reserva/PropiedadesDisponibles?tipoEstadoReserva={huespedId}", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "http",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 5222
+
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/api/Reserva/PropiedadesDisponibles?tipoEstadoReserva={huespedId}", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "GET" ]
+
+	   },
+	   // ****************************************** Servicio de Reserva Disponibles     **************************************//
+	   {
+		  "Key": "propiedDisponible",
+		  "DownstreamPathTemplate": "/api/Propiedad/PropiedadesDisponibles?tipoEstadoReserva={estado}", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "http",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 5222
+
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/propiedad/{estado}", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "GET" ]
+
+	   },
+	   // ****************************************** Servicio de Registro de Propiedad **************************************//
+	   {
+		  "Key": "registrarHuesped",
+		  "DownstreamPathTemplate": "/api/Huesped/CrearHuesped", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "http",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 5222
+
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/api/NurBNB/CrearHuesped", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "POST" ]
+
+	   },
+	   // ****************************************** Servicio de Buscar TODOS los Huespedes ***************************************************//
+	   {
+		  "Key": "BuscarTodosHuesped",
+		  "DownstreamPathTemplate": "/api/Huesped/BuscarHuesped", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "http",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 5222
+
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/api/Huesped/BuscarHuesped", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "GET" ]
+		  //--------------------------------------------------
+		  // Para servicio de Autorizacion de Buscar Huesped 
+		  //--------------------------------------------------
+		  //"AuthenticationOptions": {
+		  //    "AuthenticationProviderKey": "Bearer",
+		  //    "AllowedScopes": []
+		  //}
+
+	   },
+	   // ****************************************** Servicio de Buscar Huespedes ***************************************************//
+	   {
+		  "Key": "BuscarHuesped",
+		  "DownstreamPathTemplate": "/api/Huesped/BuscarHuesped?searchTerm={huespedId}", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "http",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 5222
+
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/api/Huesped/BuscarHuesped?searchTerm={huespedId}", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "GET" ]
+		  //--------------------------------------------------
+		  // Para servicio de Autorizacion de Buscar Huesped 
+		  //--------------------------------------------------
+		  //"AuthenticationOptions": {
+		  //    "AuthenticationProviderKey": "Bearer",
+		  //    "AllowedScopes": []
+		  //}
+
+	   },
+	   // ****************************************** Servicio de Registro de Propiedad **************************************//
+	   {
+		  "Key": "registrarPropiedad",
+		  "DownstreamPathTemplate": "/api/Propiedad", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "http",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 5222
+
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/api/NurBNB/Propiedad", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "POST" ]
+
+	   },
+	   // *********************************************  Servicio de Login **************************************************//
+	   {
+		  "DownstreamPathTemplate": "/api/security/login", // Esto es para la Ruta del API del Microservicios
+		  "DownstreamScheme": "https",
+		  "DownstreamHostAndPorts": [
+			 {
+				"Host": "localhost",
+				"Port": 7117
+			 }
+		  ],
+		  "UpstreamPathTemplate": "/api/security/login", // Esto es para la Ruta del ApiGateway
+		  "UpstreamHttpMethod": [ "POST" ]
+	   }
+	   // *******************************************************************************************************************//
+    ],
+
+    "Aggregates": [
+	   {
+		  "RouteKeys": [
+			 "propiedadesDisponibles",
+			 "BuscarHuesped"
+		  ],
+		  "UpstreamPathTemplate": "/api/propiedad-huesped/{huespedId}",
+		  "Aggregator": "HuespedReservaDetailAggregator"
+
+	   }
+    ],
+
+    "GlobalConfiguration": {
+	   "BaseUrl": "https://localhost:7219"
+    }
+}
