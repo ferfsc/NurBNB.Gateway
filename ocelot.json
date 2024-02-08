@@ -202,8 +202,67 @@
 			],
 			"UpstreamPathTemplate": "/api/security/login", // Esto es para la Ruta del ApiGateway
 			"UpstreamHttpMethod": [ "POST" ]
-		}
+		},
 		// *******************************************************************************************************************//
+		{
+			"Key": "catalogo-pago",
+			"UpstreamPathTemplate": "/api/CatalogoPago",
+			"UpstreamHttpMethod": [ "GET" ],
+
+			"DownstreamPathTemplate": "/api/CatalogoPago", // Ruta de microservicio de pago
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 7105
+				}
+			]
+		},
+		{
+			"Key": "registrar_catalogopago",
+			"UpstreamPathTemplate": "/api/CatalogoPago",
+			"UpstreamHttpMethod": [ "POST" ],
+
+			"DownstreamPathTemplate": "/api/CatalogoPago/CrearCatalogo", // Ruta de microservicio de pago
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 7105
+
+				}
+			]
+		},
+		{
+			"Key": "catalogo-devolucion",
+			"UpstreamPathTemplate": "/api/CatalogoDevolucion",
+			"UpstreamHttpMethod": [ "GET" ],
+
+			"DownstreamPathTemplate": "/api/CatalogoDevolucion", // Ruta de microservicio de pago
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 7105
+
+				}
+			]
+		},
+		{
+			"Key": "registrar_catalogodevolucion",
+			"UpstreamPathTemplate": "/api/CatalogoDevolucion",
+			"UpstreamHttpMethod": [ "POST" ],
+
+			"DownstreamPathTemplate": "/api/CatalogoDevolucion", // Ruta de microservicio de pago
+			"DownstreamScheme": "https",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 7105
+
+				}
+			]
+		}
 	],
 
 	"Aggregates": [
