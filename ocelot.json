@@ -16,6 +16,38 @@
 			"UpstreamHttpMethod": [ "POST" ]
 
 		},
+		// ****************************************** Servicio de Confirmar Solicitud de Reserva ****************************//
+		{
+			"Key": "confirmarReserva",
+			"DownstreamPathTemplate": "/api/Reserva/ConfirmarReserva", // Esto es para la Ruta del API del Microservicios
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5222
+
+				}
+			],
+			"UpstreamPathTemplate": "/NurBNB/Reserva/ConfirmarReserva", // Esto es para la Ruta del ApiGateway
+			"UpstreamHttpMethod": [ "POST" ]
+
+		},
+		// ****************************************** Servicio de Rechazar Solicitud de Reserva ****************************//
+		{
+			"Key": "rechazarReserva",
+			"DownstreamPathTemplate": "/api/Reserva/RechazarReserva", // Esto es para la Ruta del API del Microservicios
+			"DownstreamScheme": "http",
+			"DownstreamHostAndPorts": [
+				{
+					"Host": "localhost",
+					"Port": 5222
+
+				}
+			],
+			"UpstreamPathTemplate": "/NurBNB/Reserva/RechazarReserva", // Esto es para la Ruta del ApiGateway
+			"UpstreamHttpMethod": [ "POST" ]
+
+		},
 		// ****************************************** Servicio de Propiedades Disponibles **************************************//
 		{
 			"Key": "propiedadesDisponibles",
